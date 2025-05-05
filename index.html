@@ -12,13 +12,13 @@
     <body>
         <section id="header_buttons">
             <div class="header_buttons">
-                <button id="pause_btn">
+                <button id="pause_btn" class="header_btn">
                     <img src="images/pause.png" alt="Pause" class="pause_icon">
                 </button>
-                <button id="audio_btn">
+                <button id="audio_btn" class="header_btn">
                     <img src="images/audio.png" alt="Audio" class="audio_icon">
                 </button>
-                <button id="exit_btn">
+                <button id="exit_btn" class="header_btn">
                     <img src="images/exit.png" alt="Exit" class="exit_icon">
                 </button>
             </div>
@@ -27,10 +27,52 @@
         <section id="game_table">
             <div class="game-container">
                 <div class="player_side">
-
+                    <div class="player_score">
+                        <h1>Score:</h1>
+                    </div>
+                    <div class="player_table">
+                        <div class="player_choice">
+                            <!-- placeholder pa ni -->
+                            <img src="images/rock.png" alt="Rock" class="rock_icon"> 
+                        </div>
+                    </div>
                 </div>
                 <img src="images/vs.png" alt="vs icon" class="vs_icon">
+                <div class="computer_side">
+                    <div class="computer_score">
+                        <h1>Score:</h1>
+                    </div>
+                    <div class="computer_table">
+                        <div class="computer_choice">
+                            <!-- placeholder pa ni -->
+                            <img src="images/paper.png" alt="Paper" class="paper_icon"> 
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <section id="record_and_buttons">
+            <div class="player_record">
+                <h1>Record</h1>
+                <div class="record_box" id="player_record_box"></div>
+            </div>
+            <div class="control_buttons">
+                <button id="rock_choice" class="choice_btn">
+                    <img src="images/rock.png" alt="Rock" class="rock_icon2"> 
+                </button>
+                <button id="scissors_choice" class="choice_btn">
+                    <img src="images/scissors.png" alt="Scissors" class="scissors_icon2"> 
+                </button>
+                <button id="paper_choice" class="choice_btn">
+                    <img src="images/paper.png" alt="Paper" class="paper_icon2"> 
+                </button>
+            </div>
+            <div class="computer_record">
+                <h1>Record</h1>
+                <div class="record_box" id="computer_record_box"></div>
+            </div>
+        </section>
             
     </body>
 </html>
