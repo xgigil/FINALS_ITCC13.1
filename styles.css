@@ -1,5 +1,7 @@
 html {
     scroll-behavior: smooth;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -83,7 +85,6 @@ h1 {
 }
 
 .player_table, .computer_table {
-    flex: 1;
     background: #a2a2a271;
     border-radius: 15px;
     padding: 20px;
@@ -94,6 +95,8 @@ h1 {
 }
 
 .player_choice, .computer_choice {
+    width: 250px;
+    height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;

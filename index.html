@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
         <title>ROCK-PAPER-SCISSORS</title>
-        <link rel="icon" type="image/png" href="">
+        <link rel="icon" type="image/png" href="images/title.png">
     </head>
 
     <body>
@@ -35,7 +35,6 @@
                         </div>
                         <div class="player_table">
                             <div class="player_choice">
-                                <!-- placeholder pa ni -->
                                 <img src="images/rock.png" alt="Rock" class="options_icon"> 
                             </div>
                         </div>
@@ -47,7 +46,6 @@
                         </div>
                         <div class="computer_table">
                             <div class="computer_choice">
-                                <!-- placeholder pa ni -->
                                 <img src="images/rock.png" alt="Rock" class="options_icon"> 
                             </div>
                         </div>
@@ -63,13 +61,13 @@
                     </div>
                 </div>
                 <div class="control_buttons">
-                    <button id="rock_choice" class="choice_btn">
+                    <button id="rock_choice" class="choice_btn" onclick="playGame('rock')">
                         <img src="images/rock.png" alt="Rock" id="rock_iconS" class="options_iconS"> 
                     </button>
-                    <button id="scissors_choice" class="choice_btn">
+                    <button id="scissors_choice" class="choice_btn" onclick="playGame('scissors')">
                         <img src="images/scissors.png" alt="Scissors" id="scissors_iconS" class="options_iconS"> 
                     </button>
-                    <button id="paper_choice" class="choice_btn">
+                    <button id="paper_choice" class="choice_btn" onclick="playGame('paper')">
                         <img src="images/paper.png" alt="Paper" id="paper_iconS" class="options_iconS"> 
                     </button>
                 </div>
@@ -81,5 +79,7 @@
                 </div>
             </section>
         </div>
+
+        <script src="script.js"></script>
     </body>
 </html>
