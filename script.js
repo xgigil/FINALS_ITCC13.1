@@ -98,3 +98,52 @@ function playGame(playerChoice) {
 document.querySelectorAll(".options_icon").forEach(img => {
     img.style.transition = "transform 0.2s ease";
 });
+
+
+
+
+
+// Get the screen width and height
+const screenWidth = window.innerWidth;
+const screenHeight = window.innerHeight;
+
+console.log(`Screen Width: ${screenWidth}px`);
+console.log(`Screen Height: ${screenHeight}px`);
+
+document.body.insertAdjacentHTML(
+    'beforeend',
+    `<p style="position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.5); color: white; padding: 5px; border-radius: 5px;">
+        Screen: ${screenWidth}px x ${screenHeight}px
+    </p>`
+);
+
+
+function updateScreenDimensions() {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    console.log(`Screen Width: ${screenWidth}px`);
+    console.log(`Screen Height: ${screenHeight}px`);
+
+    // Update or create the display element
+    let screenSizeDisplay = document.querySelector("#screen-size-display");
+    if (!screenSizeDisplay) {
+        screenSizeDisplay = document.createElement("p");
+        screenSizeDisplay.id = "screen-size-display";
+        screenSizeDisplay.style.position = "fixed";
+        screenSizeDisplay.style.bottom = "10px";
+        screenSizeDisplay.style.right = "10px";
+        screenSizeDisplay.style.background = "rgba(0,0,0,0.5)";
+        screenSizeDisplay.style.color = "white";
+        screenSizeDisplay.style.padding = "5px";
+        screenSizeDisplay.style.borderRadius = "5px";
+        document.body.appendChild(screenSizeDisplay);
+    }
+    screenSizeDisplay.textContent = `Screen: ${screenWidth}px x ${screenHeight}px`;
+}
+
+// Initial call to display screen dimensions
+updateScreenDimensions();
+
+// Add event listener to update dimensions on window resize
+window.addEventListener("resize", updateScreenDimensions);
