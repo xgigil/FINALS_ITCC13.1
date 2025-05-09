@@ -1,7 +1,6 @@
 html {
     scroll-behavior: smooth;
     height: 100%;
-    overflow: hidden;
     font-size: 16px;
 }
 
@@ -23,7 +22,7 @@ body {
 
 #header_buttons {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     margin: 0;
     padding: 0 0;
     margin: 0 0 0 0;
@@ -137,21 +136,21 @@ h1 {
 .record_box {
     height: 100px;
     margin: 0 20px;
-    border-radius: 30px 30px 0 0; 
+    border-radius: 30px 30px 0 0;
     position: relative;
     display: flex;
-    align-items: flex-end; 
+    align-items: flex-end;
 }
 
 #player_recordBox {
-    background: #74b9ff; 
-    border-top-left-radius: 0;  
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); 
+    background: #74b9ff;
+    border-top-left-radius: 0;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #computer_recordBox {
     background: #ff6b6b;
-    border-top-right-radius: 0; 
+    border-top-right-radius: 0;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -195,7 +194,59 @@ h1 {
     align-items: center;
     font-size: 3rem;
     height: 100%;
-    width: 100%;           
+    width: 100%;
     margin: 0;
     text-align: center;
+}
+
+/* --- Responsive Styling sa Selpon --- */
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+
+    .button_icon,
+    .options_iconS {
+        width: 30px;
+    }
+
+    #trophy_icon {
+        width: 50px;
+    }
+
+    .player_choice, .computer_choice {
+        width: 150px;
+        height: 150px;
+        margin: 20px 20px;
+    }
+
+    .options_icon {
+        width: 120px;
+    }
+
+    .vs_icon {
+        height: 100px;
+        margin: 20px -50px 0;
+    }
+
+    .choice_btn {
+        width: 60px;
+        height: 60px;
+        padding: 10px;
+    }
+
+    .record_box {
+        height: 70px;
+        margin: 0 10px;
+    }
+
+    .control_buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin: 0;
+    }
 }
