@@ -1,3 +1,15 @@
+window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+});
+
+const pauseBtn = document.getElementById("pause_btn");
+const pausePopup = document.getElementById("pause_popup");
+const resumeBtn = document.getElementById("resume_btn");
+
+const leaderboardBtn = document.getElementById("trophy_btn");
+const leaderboardPopup = document.getElementById("leaderboard_popup");
+const closeLeaderboardBtn = document.getElementById("close_leaderboard_btn");
+
 let playerScore = 0;
 let computerScore = 0;
 let isAnimating = false;
@@ -97,4 +109,30 @@ function playGame(playerChoice) {
 
 document.querySelectorAll(".options_icon").forEach(img => {
     img.style.transition = "transform 0.2s ease";
+});
+
+// Pause Pop-up
+pauseBtn.addEventListener("click", () => {
+    pausePopup.classList.remove("hidden");
+});
+
+resumeBtn.addEventListener("click", () => {
+    pausePopup.classList.add("hidden");
+});
+
+document.getElementById("restart_btn").addEventListener("click", () => {
+    window.location.reload();
+});
+
+document.getElementById("quit_btn").addEventListener("click", () => {
+    window.location.href = "index.html";
+});
+
+// Leaderboard
+leaderboardBtn.addEventListener("click", () => {
+    leaderboardPopup.classList.remove("hidden");
+});
+
+closeLeaderboardBtn.addEventListener("click", () => {
+    leaderboardPopup.classList.add("hidden");
 });
