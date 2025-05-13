@@ -10,6 +10,12 @@
     </head>
 
     <body class="game_body">
+        <div id="rules_popup" class="popup hidden">
+            <div class="popup_content" id="rules_content">
+                <button class="popup_btn" id="startGame_btn">V</button>
+            </div>
+        </div>
+
         <div class="entire-container">
             <section id="header_buttons">
                 <div class="leaderboard_button">
@@ -84,7 +90,7 @@
             <div class="popup_content" id="pause_content">
                 <button class="popup_btn" id="resume_btn">Resume</button>
                 <button class="popup_btn" id="restart_btn">Restart</button>
-                <button class="popup_btn" id="music_btn">Profile</button>
+                <button class="popup_btn" id="profile_btn">Profile</button>
                 <button class="popup_btn" id="quit_btn">Quit</button>
             </div>
         </div>
@@ -96,6 +102,20 @@
                         
                     </ul>
                 <button class="popup_btn" id="close_leaderboard_btn">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="confirmation_popup" class="popup hidden">
+            <div class="popup_content" id="confirmation_content">
+                <h2></h2>
+                <div class="confirmation_buttons">
+                    <button class="popup_btn" id="confirm_btn" onclick="handleConfirm()">
+                        <img src="images/confirm.png" alt="Confirm" id="confirm_icon">
+                    </button>
+                    <button class="popup_btn" id="cancel_btn" onclick="handleCancel()">
+                        <img src="images/cancel.png" alt="Cancel" id="cancel_icon">
+                    </button>
                 </div>
             </div>
         </div>

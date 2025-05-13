@@ -89,6 +89,14 @@ h1 {
     margin: 0 0 0 10px;
 }
 
+h2 {
+    font-size: 1.2rem;
+    color: black;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+}
+
 .player_score, .computer_score {
     display: flex;
     align-items: flex-start;
@@ -218,18 +226,49 @@ h1 {
 }
 
 .background_index {
-    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left, .right {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 10%;
+    z-index: 1;
+}
+
+#right_hand, #left_hand {
+    width: 110%;
+    height: auto;
+    object-fit: contain;
+    background: none;
+}
+
+.left {
+    justify-content: flex-end;
+    padding-right: 20px;
+    margin-right: -200px;
+}
+
+.right {
+    justify-content: flex-start;
+    padding-left: 20px;
+    margin-left: -200px;
 }
 
 .center_index {
     position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     margin-top: 45px;
+    z-index: 2;
 }
 
 #start_icon {
@@ -260,7 +299,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(0, 0, 0, 0.2);
+    background-color: rgb(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -272,11 +311,9 @@ h1 {
 }
 
 .popup_content {
-    background-color: rgba(130, 170, 249, 0.8);
-    margin-bottom: 17%;
-    margin-left: 80%;
-    border-radius: 15px;
-    border: black 2px solid;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    border: 3px solid #ffd700;
     padding: 20px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -287,35 +324,70 @@ h1 {
     width: 210px;
     margin: 10px auto;
     padding: 10px;
-    background-color: #ff6b6b;
+    background-color: #f7d200e8;
     border: none;
-    border-radius: 15px;
-    border: black 2px solid;
+    border-radius: 25px;
     color: white;
     font-size: 1.3rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: transform 0.3s;
+}
+
+#restart_btn, #resume_btn, #profile_btn, #quit_btn {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .popup_btn:hover {
-    background-color: #ff4444;
+    background-color: #ffd9009a;
 }
 /* Pause Pop-up */
 
-/* Leaderboard Pop-up */
-#leaderboard_content {
-    margin-bottom: 25%;
-    margin-right: 160%;
-    background-color: rgba(238, 244, 255);
+/* Confirmation Pop-up */
+#confirmation_content {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    border: 3px solid #ffd700;
+    padding: 20px 40px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#leaderboard_content h2 {
-    font-size: 1.2rem;
-    color: black;
+#confirmation_content h2 {
+    margin-bottom: 10px;
+}
+
+.confirmation_buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+#confirmation_content .popup_btn {
+    width: auto;
+    background: none;
+    border: none;
+    padding: 5px;
     margin: 0;
-    padding: 10px;
-    text-align: center;
+}
+
+#confirmation_content .popup_btn:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+#confirm_icon, #cancel_icon {
+    width: 50px;
+    height: 50px;
+}
+/* Confirmation Pop-up */
+
+/* Leaderboard Pop-up */
+#leaderboard_content {
+    background-color: rgba(238, 244, 255, 0.95);
+    max-width: 400px;
+    width: 90%;
 }
 
 #leaderboard_list {
@@ -323,10 +395,27 @@ h1 {
     padding: 0;
     margin: 20px 0;
     text-align: left;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+#leaderboard_list::-webkit-scrollbar {
+    width: 8px;
+}
+
+#leaderboard_list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+#leaderboard_list::-webkit-scrollbar-thumb {
+    background: #82aaf9;
+    border-radius: 4px;
 }
 
 #leaderboard_list li {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    color: #333;
     margin: 5px 0;
     display: flex;
     justify-content: space-between;
@@ -340,6 +429,10 @@ h1 {
 #leaderboard_list li img {
     width: 20px;
     height: 20px;
+}
+
+#close_leaderboard_btn {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 /* Leaderboard Pop-up */
 
@@ -401,5 +494,18 @@ h1 {
     h1 {
         font-size: 1.5rem;
         margin: 0;
+    }
+
+    #confirmation_content {
+        padding: 15px 30px;
+    }
+
+    #confirmation_content h2 {
+        font-size: 1.2rem;
+    }
+
+    #confirm_icon, #cancel_icon {
+        width: 40px;
+        height: 40px;
     }
 }
