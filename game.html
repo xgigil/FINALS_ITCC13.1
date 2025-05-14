@@ -10,6 +10,23 @@
     </head>
 
     <body class="game_body">
+        <div id="rules_popup" class="popup hidden">
+            <div class="popup_content" id="rules_content">
+                <img src="images/rules.png" alt="Rules" id="rules_icon">
+                <p>Choose Rock, Paper, or Scissors</p>
+                <ol>
+                    <li>Rock beats Scissors</li>
+                    <li>Scissors beats Paper</li>
+                    <li>Paper beats Rock</li>
+                </ol>
+                <p>Win the round to earn a point!</p>
+                <p>Lose, and the computer scores instead...</p>
+                <p>Rack up points and reach the top of the leaderboards!</p>
+                <p class="ready_text">Are you ready?</p>
+                <img src="images/start.png" alt="Start Button" id="startGame_btn">
+            </div>
+        </div>
+
         <div class="entire-container">
             <section id="header_buttons">
                 <div class="leaderboard_button">
@@ -81,11 +98,10 @@
         </div>
 
         <div id="pause_popup" class="popup hidden">
-            <h1>PAUSE</h1>
             <div class="popup_content" id="pause_content">
                 <button class="popup_btn" id="resume_btn">Resume</button>
-                <button class="popup_btn" id="restart_btn">Restart</button>
-                <button class="popup_btn" id="music_btn">Profile</button>
+                <button class="popup_btn" id="rules_btn">Rules</button>
+                <button class="popup_btn" id="profile_btn">Profile</button>
                 <button class="popup_btn" id="quit_btn">Quit</button>
             </div>
         </div>
@@ -101,6 +117,24 @@
             </div>
         </div>
 
+        <div id="confirmation_popup" class="popup hidden">
+            <div class="popup_content" id="confirmation_content">
+                <h2></h2>
+                <div class="confirmation_buttons">
+                    <button class="popup_btn" id="confirm_btn" onclick="handleConfirm()">
+                        <img src="images/confirm.png" alt="Confirm" id="confirm_icon">
+                    </button>
+                    <button class="popup_btn" id="cancel_btn" onclick="handleCancel()">
+                        <img src="images/cancel.png" alt="Cancel" id="cancel_icon">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <p>© 2025 Rock Paper Scissors | Created by Karla Alo-ot and Gail Loking</p>
+        </footer>
+
         <script src="script.js"></script>
+        <script type="module" src="game.js"></script>
     </body>
 </html>

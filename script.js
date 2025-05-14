@@ -1,92 +1,101 @@
+const rulesPopup = document.getElementById("rules_popup")
+const startGameBtn = document.getElementById("startGame_btn")
+const rulesBtn = document.getElementById("rules_btn")
+
 window.addEventListener("load", () => {
-    document.body.classList.add("loaded");
-});
+    document.body.classList.add("loaded")
+    rulesPopup.classList.remove("hidden")
+})
 
-const pauseBtn = document.getElementById("pause_btn");
-const pausePopup = document.getElementById("pause_popup");
-const resumeBtn = document.getElementById("resume_btn");
+const pauseBtn = document.getElementById("pause_btn")
+const pausePopup = document.getElementById("pause_popup")
+const resumeBtn = document.getElementById("resume_btn")
 
-const leaderboardBtn = document.getElementById("trophy_btn");
-const leaderboardPopup = document.getElementById("leaderboard_popup");
-const closeLeaderboardBtn = document.getElementById("close_leaderboard_btn");
+const popup = document.getElementById('confirmation_popup')
+const confirmationText = document.querySelector('#confirmation_content h2')
 
-let playerScore = 0;
-let computerScore = 0;
-let isAnimating = false;
-let playerHistory = [];
+const leaderboardBtn = document.getElementById("trophy_btn")
+const leaderboardPopup = document.getElementById("leaderboard_popup")
+const closeLeaderboardBtn = document.getElementById("close_leaderboard_btn")
+
+let playerScore = 0
+let computerScore = 0
+let isAnimating = false
+let playerHistory = []
+let currentAction = ''
 
 function getComputerChoice() {
     if (playerHistory.length >= 3) {
-        let lastThreeMoves = playerHistory.slice(-3);
+        let lastThreeMoves = playerHistory.slice(-3)
         
         if (lastThreeMoves[0] === lastThreeMoves[2]) {
             switch (lastThreeMoves[2]) {
-                case 'rock': return 'paper';
-                case 'paper': return 'scissors';
-                case 'scissors': return 'rock';
+                case 'rock': return 'paper'
+                case 'paper': return 'scissors'
+                case 'scissors': return 'rock'
             }
         }
     }
 
     if (playerHistory.length > 0) {
-        let lastPlayerMove = playerHistory[playerHistory.length - 1];
-        let choices = ["rock", "paper", "scissors"];
+        let lastPlayerMove = playerHistory[playerHistory.length - 1]
+        let choices = ["rock", "paper", "scissors"]
         let weights = choices.map(choice => {
             if ((lastPlayerMove === "rock" && choice === "paper") ||
                 (lastPlayerMove === "paper" && choice === "scissors") ||
                 (lastPlayerMove === "scissors" && choice === "rock")) {
-                return 0.5;
+                return 0.5
             }
-            return 0.25;
-        });
+            return 0.25
+        })
         
-        let total = weights.reduce((a, b) => a + b);
-        let random = Math.random() * total;
-        let sum = 0;
+        let total = weights.reduce((a, b) => a + b)
+        let random = Math.random() * total
+        let sum = 0
         
         for (let i = 0; i < choices.length; i++) {
-            sum += weights[i];
-            if (random <= sum) return choices[i];
+            sum += weights[i]
+            if (random <= sum) return choices[i]
         }
     }
 
-    const choices = ["rock", "paper", "scissors"];
-    return choices[Math.floor(Math.random() * choices.length)];
+    const choices = ["rock", "paper", "scissors"]
+    return choices[Math.floor(Math.random() * choices.length)]
 }
 
 function playGame(playerChoice) {
-    if (isAnimating) return;
-    isAnimating = true;
+    if (isAnimating) return
+    isAnimating = true
 
-    playerHistory.push(playerChoice);
+    playerHistory.push(playerChoice)
     
-    const computerChoice = getComputerChoice();
+    const computerChoice = getComputerChoice()
 
-    const playerChoiceElement = document.querySelector(".player_choice img");
-    const computerChoiceElement = document.querySelector(".computer_choice img");
+    const playerChoiceElement = document.querySelector(".player_choice img")
+    const computerChoiceElement = document.querySelector(".computer_choice img")
 
-    playerChoiceElement.src = "images/rock.png";
-    computerChoiceElement.src = "images/rock.png";
+    playerChoiceElement.src = "images/rock.png"
+    computerChoiceElement.src = "images/rock.png"
 
-    let count = 0;
+    let count = 0
     const shakeInterval = setInterval(() => {
         if (count % 2 === 0) {
-            playerChoiceElement.style.transform = "translateY(-20px)";
-            computerChoiceElement.style.transform = "translateY(-20px)";
+            playerChoiceElement.style.transform = "translateY(-20px)"
+            computerChoiceElement.style.transform = "translateY(-20px)"
         } else {
-            playerChoiceElement.style.transform = "translateY(0px)";
-            computerChoiceElement.style.transform = "translateY(0px)";
+            playerChoiceElement.style.transform = "translateY(0px)"
+            computerChoiceElement.style.transform = "translateY(0px)"
         }
-        count++;
+        count++
 
         if (count > 6) {
-            clearInterval(shakeInterval);
+            clearInterval(shakeInterval)
             
-            playerChoiceElement.src = `images/${playerChoice}.png`;
-            computerChoiceElement.src = `images/${computerChoice}.png`;
+            playerChoiceElement.src = `images/${playerChoice}.png`
+            computerChoiceElement.src = `images/${computerChoice}.png`
 
-            playerChoiceElement.style.transform = "translateY(0px)";
-            computerChoiceElement.style.transform = "translateY(0px)";
+            playerChoiceElement.style.transform = "translateY(0px)"
+            computerChoiceElement.style.transform = "translateY(0px)"
 
             if (playerChoice === computerChoice) {
             } else if (
@@ -94,45 +103,86 @@ function playGame(playerChoice) {
                 (playerChoice === "paper" && computerChoice === "rock") ||
                 (playerChoice === "scissors" && computerChoice === "paper")
             ) {
-                playerScore++;
+                playerScore++
             } else {
-                computerScore++;
+                computerScore++
             }
 
-            document.querySelector("#player_recordBox .record-win").textContent = playerScore;
-            document.querySelector("#computer_recordBox .record-win").textContent = computerScore;
+            document.querySelector("#player_recordBox .record-win").textContent = playerScore
+            document.querySelector("#computer_recordBox .record-win").textContent = computerScore
             
-            isAnimating = false;
+            isAnimating = false
         }
-    }, 300);
+    }, 300)
+}
+
+function showConfirmationPopup(action) {
+    currentAction = action
+    
+    if (action === 'quit') {
+        confirmationText.textContent = 'Quit the game?'
+    }
+    popup.classList.remove('hidden')
+}
+
+function handleConfirm() {
+    if (currentAction === 'quit') {
+        window.location.href = 'index.html'
+    }
+    document.getElementById('confirmation_popup').classList.add('hidden')
+}
+
+function handleCancel() {
+    document.getElementById('confirmation_popup').classList.add('hidden')
 }
 
 document.querySelectorAll(".options_icon").forEach(img => {
-    img.style.transition = "transform 0.2s ease";
-});
+    img.style.transition = "transform 0.2s ease"
+})
+
+// Rules Pop-up
+startGameBtn.addEventListener("click", () => {
+    rulesPopup.classList.add("hidden")
+})
+
+rulesBtn.addEventListener("click", () => {
+    pausePopup.classList.add("hidden")
+    rulesPopup.classList.remove("hidden")
+})
 
 // Pause Pop-up
 pauseBtn.addEventListener("click", () => {
-    pausePopup.classList.remove("hidden");
-});
+    pausePopup.classList.remove("hidden")
+})
 
 resumeBtn.addEventListener("click", () => {
-    pausePopup.classList.add("hidden");
-});
-
-document.getElementById("restart_btn").addEventListener("click", () => {
-    window.location.reload();
-});
-
-document.getElementById("quit_btn").addEventListener("click", () => {
-    window.location.href = "index.html";
-});
+    pausePopup.classList.add("hidden")
+})
 
 // Leaderboard
 leaderboardBtn.addEventListener("click", () => {
-    leaderboardPopup.classList.remove("hidden");
-});
+    leaderboardPopup.classList.remove("hidden")
+})
 
 closeLeaderboardBtn.addEventListener("click", () => {
-    leaderboardPopup.classList.add("hidden");
-});
+    leaderboardPopup.classList.add("hidden")
+})
+
+// Confirmation
+document.getElementById('quit_btn').addEventListener('click', () => {
+    pausePopup.classList.add("hidden")
+    showConfirmationPopup('quit')
+})
+
+function toggleForms() {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+                
+        if (loginForm.style.display !== 'none') {
+                    loginForm.style.display = 'none';
+                    registerForm.style.display = 'block';
+        } else {
+                    loginForm.style.display = 'block';
+                    registerForm.style.display = 'none';
+        }
+}
