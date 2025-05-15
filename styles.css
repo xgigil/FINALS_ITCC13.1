@@ -785,32 +785,47 @@ h2 {
 /* Profile Pop-up */
 #profile_content {
     background-color: rgba(130, 170, 249, 0.95);
-    max-width: 350px;
+    max-width: 400px;
     width: 90%;
     border: 2px solid black;
-    padding: 30px;
+    padding: 25px; 
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 22px;
+    box-sizing: border-box;
+}
+
+#profile_content::-webkit-scrollbar {
+    width: 6px;
+}
+#profile_content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 #profile_content h2 {
     color: white;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+    font-size: 2rem;
+    margin-bottom: 15px; 
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .profile-options {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin: 20px 0;
+    gap: 5px; 
+    margin: 20px 0; 
+    width: 100%;
 }
 
 .profile-option-btn {
     background-color: #ff4444 !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
-    font-size: 1.2rem !important;
-    padding: 12px 25px !important;
+    font-size: 1.3rem !important;
+    padding: 12px 25px !important; 
     transition: all 0.3s ease !important;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .profile-option-btn:hover {
@@ -820,8 +835,8 @@ h2 {
 
 .profile-section {
     background-color: rgba(255, 255, 255, 0.95);
-    margin: 20px 0;
-    padding: 25px;
+    margin: 15px 0; 
+    padding: 16px; 
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
@@ -829,8 +844,8 @@ h2 {
 
 .profile-section h3 {
     color: #333;
-    font-size: 1.3rem;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
+    margin-bottom: 15px; 
     text-align: center;
 }
 
@@ -846,8 +861,10 @@ h2 {
 
 .profile-section .popup_btn {
     background-color: #ff4444;
-    margin-top: 20px;
+    margin-top: 15px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .profile-section .popup_btn:hover {
@@ -864,7 +881,7 @@ h2 {
 
 .profile-section .back-btn {
     background-color: #82aaf9;
-    margin-top: 15px;
+    margin-top: 10px; 
 }
 
 .profile-section .back-btn:hover {
@@ -873,8 +890,10 @@ h2 {
 
 #closeProfile_btn {
     background-color: #ff4444;
-    margin-top: 25px;
+    margin-top: 15px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #closeProfile_btn:hover {
@@ -900,8 +919,8 @@ h2 {
         transform: translateY(0); 
     }
 }
-/* Profile Pop-up */
 
+/* Profile Pop-up - Responsive for smaller screens */
 @media (max-width: 768px) {
     html {
         font-size: 14px;
@@ -975,9 +994,6 @@ h2 {
         width: 40px;
         height: 40px;
     }
-    #rules_icon {
-        width: 200px;
-    }
 
     #rules_icon {
         width: 150px;
@@ -991,7 +1007,7 @@ h2 {
         font-size: 1.2rem;
     }
 
-     #startGame_btn {
+    #startGame_btn {
         width: 120px; 
     }
 }
