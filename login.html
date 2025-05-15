@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Login - ROCK-PAPER-SCISSORS</title>
+        <link rel="icon" type="image/png" href="images/title.png">
+    </head>
+
+    <body class="login_body">
+        <div class="background_login">
+            <div class="lrleft">
+                <img src="images/left.png" alt="Left Hand" id="lrleft_hand">
+            </div>
+            <div class="center_login">
+                <div class="lrtitle">
+                    <img src="images/title.png" alt="Title" id="lrtitle_icon">
+                </div>
+                <!-- Login Form -->
+                <div id="loginForm" class="login_box">
+                    <div class="social_login">
+                        <button class="social_btn" onclick="signInWithGoogle()">
+                            <img src="images/google.png" alt="Google">
+                            Sign in with Google
+                        </button>
+                    </div>
+                    <h4 class="or_text">---------------------------------------------------or---------------------------------------------------</h4>
+                    <input type="text" placeholder="Username" class="login_input" id="username" required>
+                    <input type="password" placeholder="Password" class="login_input" id="password" required>
+                    <div class="login_buttons">
+                        <button id="login_btn" class="popup_btn">Log in</button>
+                        <button id="back_btn" class="popup_btn" onclick="window.location.href='index.html';">Back</button>
+                    </div>
+                    <p class="register_text">Don't have an account yet? <a class="hover-underline-animation center" href="#" onclick="toggleForms()">Click here to register</a></p>
+                </div>
+                <!-- Register Form -->
+                <div id="registerForm" class="login_box" style="display: none;">
+                    <input type="text" placeholder="Username" class="login_input" id="regUsername" required>
+                    <input type="email" placeholder="Email" class="login_input" id="email" required>
+                    <input type="password" placeholder="Password" class="login_input" id="regPassword" required> 
+                    <input type="password" placeholder="Confirm Password" class="login_input" id="confirmPassword" required>
+                    <div class="login_buttons">
+                        <button id="register_btn" class="popup_btn">Register</button>
+                        <button id="back_btn" class="popup_btn" onclick="toggleForms()">Back</button>
+                    </div>
+                    <p class="register_text">Already have an account? <a class="hover-underline-animation center" href="#" onclick="toggleForms()">Click here to login</a></p>
+                </div>
+            </div>
+            <div class="lrright">
+                <img src="images/right.png" alt="Right Hand" id="lrright_hand">
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+        <script type="module" src="login.js"></script>
+    </body>
+</html>

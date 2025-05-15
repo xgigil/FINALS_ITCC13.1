@@ -1,5 +1,10 @@
+const rulesPopup = document.getElementById("rules_popup")
+const startGameBtn = document.getElementById("startGame_btn")
+const rulesBtn = document.getElementById("rules_btn")
+
 window.addEventListener("load", () => {
     document.body.classList.add("loaded")
+    rulesPopup.classList.remove("hidden")
 })
 
 const pauseBtn = document.getElementById("pause_btn")
@@ -13,10 +18,10 @@ const leaderboardBtn = document.getElementById("trophy_btn")
 const leaderboardPopup = document.getElementById("leaderboard_popup")
 const closeLeaderboardBtn = document.getElementById("close_leaderboard_btn")
 
-let playerScore = 0
-let computerScore = 0
-let isAnimating = false
-let playerHistory = []
+window.playerHistory = [];
+window.playerScore = 0;
+window.computerScore = 0;
+window.isAnimating = false;
 let currentAction = ''
 
 function getComputerChoice() {
@@ -58,75 +63,76 @@ function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)]
 }
 
-function playGame(playerChoice) {
-    if (isAnimating) return
-    isAnimating = true
+window.playGame = async function(playerChoice) {
+    if (window.isAnimating) return;
+    window.isAnimating = true;
 
-    playerHistory.push(playerChoice)
+    const playerChoiceElement = document.querySelector(".player_choice img");
+    const computerChoiceElement = document.querySelector(".computer_choice img");
     
-    const computerChoice = getComputerChoice()
+    playerChoiceElement.src = "images/rock.png";
+    computerChoiceElement.src = "images/rock.png";
 
-    const playerChoiceElement = document.querySelector(".player_choice img")
-    const computerChoiceElement = document.querySelector(".computer_choice img")
+    window.playerHistory.push(playerChoice);
+    const computerChoice = getComputerChoice();
 
-    playerChoiceElement.src = "images/rock.png"
-    computerChoiceElement.src = "images/rock.png"
-
-    let count = 0
+    let count = 0;
     const shakeInterval = setInterval(() => {
         if (count % 2 === 0) {
-            playerChoiceElement.style.transform = "translateY(-20px)"
-            computerChoiceElement.style.transform = "translateY(-20px)"
+            playerChoiceElement.style.transform = "translateY(-20px)";
+            computerChoiceElement.style.transform = "translateY(-20px)";
         } else {
-            playerChoiceElement.style.transform = "translateY(0px)"
-            computerChoiceElement.style.transform = "translateY(0px)"
+            playerChoiceElement.style.transform = "translateY(0px)";
+            computerChoiceElement.style.transform = "translateY(0px)";
         }
-        count++
+        count++;
 
         if (count > 6) {
-            clearInterval(shakeInterval)
+            clearInterval(shakeInterval);
             
-            playerChoiceElement.src = `images/${playerChoice}.png`
-            computerChoiceElement.src = `images/${computerChoice}.png`
+            playerChoiceElement.src = `images/${playerChoice}.png`;
+            computerChoiceElement.src = `images/${computerChoice}.png`;
 
-            playerChoiceElement.style.transform = "translateY(0px)"
-            computerChoiceElement.style.transform = "translateY(0px)"
+            playerChoiceElement.style.transform = "translateY(0px)";
+            computerChoiceElement.style.transform = "translateY(0px)";
 
             if (playerChoice === computerChoice) {
+                // Draw - no score update
             } else if (
                 (playerChoice === "rock" && computerChoice === "scissors") ||
                 (playerChoice === "paper" && computerChoice === "rock") ||
                 (playerChoice === "scissors" && computerChoice === "paper")
             ) {
-                playerScore++
+                window.playerScore++;
+                if (window.updateScore) {
+                    window.updateScore(true);
+                }
             } else {
-                computerScore++
+                window.computerScore++;
+                if (window.updateScore) {
+                    window.updateScore(false);
+                }
             }
 
-            document.querySelector("#player_recordBox .record-win").textContent = playerScore
-            document.querySelector("#computer_recordBox .record-win").textContent = computerScore
+            document.querySelector("#player_recordBox .record-win").textContent = window.playerScore;
+            document.querySelector("#computer_recordBox .record-win").textContent = window.computerScore;
             
-            isAnimating = false
+            window.isAnimating = false;
         }
-    }, 300)
-}
+    }, 300);
+};
 
 function showConfirmationPopup(action) {
     currentAction = action
     
-    if (action === 'restart') {
-        confirmationText.textContent = 'Restart the game?'
-    } else if (action === 'quit') {
-        confirmationText.textContent = 'Quit the game?'
+    if (action === 'quit') {
+        confirmationText.textContent = 'Exit the game?'
     }
-    
     popup.classList.remove('hidden')
 }
 
 function handleConfirm() {
-    if (currentAction === 'restart') {
-        window.location.reload()
-    } else if (currentAction === 'quit') {
+    if (currentAction === 'quit') {
         window.location.href = 'index.html'
     }
     document.getElementById('confirmation_popup').classList.add('hidden')
@@ -138,6 +144,16 @@ function handleCancel() {
 
 document.querySelectorAll(".options_icon").forEach(img => {
     img.style.transition = "transform 0.2s ease"
+})
+
+// Rules Pop-up
+startGameBtn.addEventListener("click", () => {
+    rulesPopup.classList.add("hidden")
+})
+
+rulesBtn.addEventListener("click", () => {
+    pausePopup.classList.add("hidden")
+    rulesPopup.classList.remove("hidden")
 })
 
 // Pause Pop-up
@@ -159,11 +175,6 @@ closeLeaderboardBtn.addEventListener("click", () => {
 })
 
 // Confirmation
-document.getElementById('restart_btn').addEventListener('click', () => {
-    pausePopup.classList.add("hidden")
-    showConfirmationPopup('restart')
-})
-
 document.getElementById('quit_btn').addEventListener('click', () => {
     pausePopup.classList.add("hidden")
     showConfirmationPopup('quit')
