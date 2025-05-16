@@ -381,5 +381,10 @@ audioBtn.addEventListener("click", () => {
     }
 });
 
+document.getElementById("startGame_btn").addEventListener("click", () => {
+    const bgAudio = document.getElementById("bg_audio");
+    bgAudio.volume = 0.5; // Optional volume control
+    bgAudio.play().catch(e => console.log("Audio play blocked:", e));
+});
 
 document.addEventListener('DOMContentLoaded', addBackButtons);
