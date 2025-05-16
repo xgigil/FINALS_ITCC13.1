@@ -387,4 +387,25 @@ document.getElementById("startGame_btn").addEventListener("click", () => {
     bgAudio.play().catch(e => console.log("Audio play blocked:", e));
 });
 
+const audioBtn = document.getElementById("audio_btn");
+const bgAudio = document.getElementById("bg_audio");
+
+let isMuted = false;
+
+audioBtn.addEventListener("click", () => {
+    if (isMuted) {
+        bgAudio.play().catch(err => console.log("Autoplay blocked:", err));
+        isMuted = false;
+    } else {
+        bgAudio.pause();
+        isMuted = true;
+    }
+});
+
+document.getElementById("startGame_btn").addEventListener("click", () => {
+    const bgAudio = document.getElementById("bg_audio");
+    bgAudio.volume = 0.5; // Optional volume control
+    bgAudio.play().catch(e => console.log("Audio play blocked:", e));
+});
+
 document.addEventListener('DOMContentLoaded', addBackButtons);
