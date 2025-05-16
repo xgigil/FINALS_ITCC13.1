@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset ="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>ROCK-PAPER-SCISSORS</title>
+        <link rel="icon" type="image/png" href="images/title.png">
+    </head>
+
+    <body class="game_body">
+        <audio id="bg_audio" loop>
+            <source src="Cigarette Boat.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div id="rules_popup" class="popup hidden">
+            <div class="popup_content" id="rules_content">
+                <img src="images/rules.png" alt="Rules" id="rules_icon">
+                <p>Choose Rock, Paper, or Scissors</p>
+                <ol>
+                    <li>Rock beats Scissors</li>
+                    <li>Scissors beats Paper</li>
+                    <li>Paper beats Rock</li>
+                </ol>
+                <p>Win the round to earn a point!</p>
+                <p>Lose, and the computer scores instead...</p>
+                <p>Rack up points and reach the top of the leaderboards!</p>
+                <p class="ready_text">Are you ready?</p>
+                <img src="images/start.png" alt="Start Button" id="startGame_btn">
+            </div>
+        </div>
+        <div class="entire-container">
+            <section id="header_buttons">
+                <div class="leaderboard_button">
+                    <button id="trophy_btn" class="header_btn">
+                        <img src="images/trophy.png" alt="Trophy" id="trophy_icon" class="button_icon">
+                    </button>
+                </div>
+                <div class="setting_buttons">
+                    <button id="audio_btn" class="header_btn">
+                        <img src="images/audio.png" alt="Audio" id="audio_icon" class="button_icon">
+                    </button>
+                    <button id="pause_btn" class="header_btn">
+                        <img src="images/pause.png" alt="Pause" id="audio_icon" class="button_icon">
+                    </button>
+                </div>
+            </section>
+            <section id="game_table">
+                <div class="game_container">
+                    <div class="player_side">
+                        <div class="player_score">
+                            <h1>You:</h1>
+                        </div>
+                        <div class="player_table">
+                            <div class="player_choice">
+                                <img src="images/rock.png" alt="Rock" class="options_icon"> 
+                            </div>
+                        </div>
+                    </div>
+                    <img src="images/vs.png" alt="vs icon" class="vs_icon">
+                    <div class="computer_side">
+                        <div class="computer_score">
+                            <h1>Computer:</h1>
+                        </div>
+                        <div class="computer_table">
+                            <div class="computer_choice">
+                                <img src="images/rock.png" alt="Rock" class="options_icon"> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="record_and_buttons">
+                <div class="player_record">
+                    <h1>Score</h1>
+                    <div class="record_box" id="player_recordBox">
+                        <p class="record-win">0</p>
+                    </div>
+                </div>
+                <div class="control_buttons">
+                    <button id="rock_choice" class="choice_btn" onclick="playGame('rock')">
+                        <img src="images/rock.png" alt="Rock" id="rock_iconS" class="options_iconS"> 
+                    </button>
+                    <button id="scissors_choice" class="choice_btn" onclick="playGame('scissors')">
+                        <img src="images/scissors.png" alt="Scissors" id="scissors_iconS" class="options_iconS"> 
+                    </button>
+                    <button id="paper_choice" class="choice_btn" onclick="playGame('paper')">
+                        <img src="images/paper.png" alt="Paper" id="paper_iconS" class="options_iconS"> 
+                    </button>
+                </div>
+                <div class="computer_record">
+                    <h1>Score</h1>
+                    <div class="record_box" id="computer_recordBox">
+                        <p class="record-win">0</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div id="pause_popup" class="popup hidden">
+            <div class="popup_content" id="pause_content">
+                <button class="popup_btn" id="resume_btn">Resume</button>
+                <button class="popup_btn" id="rules_btn">Rules</button>
+                <button class="popup_btn" id="profile_btn">Profile</button>
+                <button class="popup_btn" id="quit_btn">Log Out</button>
+            </div>
+        </div>
+        <div id="leaderboard_popup" class="popup hidden">
+            <div class="popup_content" id="leaderboard_content">
+                <h2>Leaderboards 🏆</h2>
+                    <ul id="leaderboard_list">
+                        
+                    </ul>
+                <button class="popup_btn" id="close_leaderboard_btn">Close</button>
+                </div>
+            </div>
+        </div>
+        <div id="confirmation_popup" class="popup hidden">
+            <div class="popup_content" id="confirmation_content">
+                <h2></h2>
+                <div class="confirmation_buttons">
+                    <button class="popup_btn" id="confirm_btn" onclick="handleConfirm()">
+                        <img src="images/confirm.png" alt="Confirm" id="confirm_icon">
+                    </button>
+                    <button class="popup_btn" id="cancel_btn" onclick="handleCancel()">
+                        <img src="images/cancel.png" alt="Cancel" id="cancel_icon">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="profile_popup" class="popup hidden">
+            <div class="popup_content" id="profile_content">
+                <h2>Profile Settings</h2>
+                <div class="profile-options">
+                    <button class="profile-option-btn popup_btn" data-target="username-section">Change Username</button>
+                    <button class="profile-option-btn popup_btn" data-target="password-section">Change Password</button>
+                    <button class="profile-option-btn popup_btn" data-target="stats-section">Reset Statistics</button>
+                </div>
+
+                <div id="profile-sections">
+                    <div id="username-section" class="profile-section hidden">
+                        <h3>Change Username</h3>
+                        <input type="text" id="currentUsername" placeholder="Current Username" class="login_input">
+                        <input type="text" id="newUsername" placeholder="New Username" class="login_input">
+                        <button type="button" class="popup_btn" onclick="updateUsername()">Update Username</button>
+                    </div>
+
+                    <div id="password-section" class="profile-section hidden">
+                        <h3>Change Password</h3>
+                        <input type="password" id="currentPassword" placeholder="Current Password" class="login_input">
+                        <input type="password" id="newPassword" placeholder="New Password" class="login_input">
+                        <input type="password" id="confirmNewPassword" placeholder="Confirm New Password" class="login_input">
+                        <button type="button" class="popup_btn" onclick="updatePassword()">Update Password</button>
+                    </div>
+
+                    <div id="stats-section" class="profile-section hidden">
+                        <h3>Reset Statistics</h3>
+                        <input type="password" id="resetPassword" placeholder="Enter Password to Reset" class="login_input">
+                        <button type="button" class="popup_btn reset-btn" onclick="resetStats()">Reset All Stats</button>
+                    </div>
+                </div>
+                <button class="popup_btn" id="closeProfile_btn">Close</button>
+            </div>
+        </div>
+        <footer class="footer">
+            <p>© 2025 Rock Paper Scissors | Created by Karla Alo-ot and Gail Loking</p>
+        </footer>
+
+        <script src="script.js"></script>
+        <script type="module" src="game.js"></script>
+    </body>
+</html>
