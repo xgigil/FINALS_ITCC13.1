@@ -387,4 +387,45 @@ document.getElementById("startGame_btn").addEventListener("click", () => {
     bgAudio.play().catch(e => console.log("Audio play blocked:", e));
 });
 
+window.updateScore = async function(win) {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    try {
+        const userRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userRef);
+        const userData = userDoc.data();
+
+        // Update scores in Firestore
+        await updateDoc(userRef, {
+            wins: win ? (userData.wins || 0) + 1 : userData.wins || 0,
+            defeats: !win ? (userData.defeats || 0) + 1 : userData.defeats || 0
+        });
+
+        // Update local display
+        if (win) {
+            document.querySelector("#player_recordBox .record-win").textContent = (userData.wins || 0) + 1;
+            playSound('win');  // Play win sound
+        } else {
+            document.querySelector("#computer_recordBox .record-win").textContent = (userData.defeats || 0) + 1;
+            playSound('loss'); // Play loss sound
+        }
+
+        console.log('Score updated:', win ? 'Win' : 'Defeat');
+    } catch (error) {
+        console.error("Error updating score:", error);
+    }
+};
+
+function playSound(outcome) {
+    const winAudio = document.getElementById("win_audio");
+    const lossAudio = document.getElementById("loss_audio");
+
+    if (outcome === 'win') {
+        winAudio.play();
+    } else if (outcome === 'loss') {
+        lossAudio.play();
+    }
+}
+
 document.addEventListener('DOMContentLoaded', addBackButtons);
